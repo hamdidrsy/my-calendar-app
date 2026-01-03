@@ -120,3 +120,46 @@
     pointer-events: none;
     /* Tıklanmasın istersen */
 }
+
+/* Seçili gün */
+.day.selected {
+    background-color: #4a90d9;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #2e6ab3;
+}
+
+/* Bugün + Seçili (aynı anda) */
+.day.today.selected {
+    background-color: #4a90d9;
+    box-shadow: 0 4px 10px rgba(74, 144, 217, 0.4);
+}
+
+/* ===== CALENDAR ACTIONS ===== */
+.calendar-actions {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 10px 0;
+}
+
+.btn-add-event {
+    background-color: #4a90d9;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add-event:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+}
+
+.btn-add-event:active {
+    transform: translateY(0);
+}
