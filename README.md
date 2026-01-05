@@ -1,51 +1,108 @@
-# React + TypeScript + Vite
+# My Calendar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite ile geliştirilmiş modern bir takvim uygulaması.
 
-Currently, two official plugins are available:
+## Proje Hakkında
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Kullanıcıların etkinlik ekleyip, görüntüleyip, silebileceği basit ve kullanışlı bir takvim uygulamasıdır. Proje eğitim amaçlı geliştirilmiştir ve modüler yapıya sahiptir.
 
-## React Compiler
+## Teknolojiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 18
+- TypeScript
+- Vite
+- CSS3 (Custom Properties)
 
-## Expanding the ESLint configuration
+## Kurulum
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Bağımlılıkları yükle
+npm install
 
-```js
-export default defineConfig([
-  # my-calendar-app
+# Geliştirme sunucusunu başlat
+npm run dev
 
-  Kısa Özet
+# Üretim için build oluştur
+npm run build
+```
 
-  Basit bir React + TypeScript + Vite takvim uygulamasıdır. Kullanıcılar etkinlik ekleyip görüntüleyebilir. Proje öğretici amaçlıdır ve geliştirilmeye açıktır.
+## Proje Yapısı
 
-  Hızlı Başlangıç
+```
+src/
+├── components/          # React bileşenleri
+│   ├── Calendar/        # Ana takvim bileşeni ve alt bileşenler
+│   │   ├── Calendar.tsx         # Ana takvim container
+│   │   ├── CalendarHeader.tsx   # Ay/yıl başlığı ve navigasyon
+│   │   ├── CalendarGrid.tsx     # Gün hücreleri grid yapısı
+│   │   ├── CalendarDay.tsx      # Tek bir gün hücresi
+│   │   ├── WeekDays.tsx         # Hafta günleri başlıkları
+│   │   └── Calendar.css         # Takvim stilleri
+│   │
+│   ├── EventDetail/     # Etkinlik detay görüntüleme
+│   │   ├── EventDetail.tsx      # Etkinlik bilgilerini gösterir
+│   │   └── EventDetail.css      # Detay stilleri
+│   │
+│   ├── EventForm/       # Etkinlik ekleme formu
+│   │   ├── EventForm.tsx        # Form bileşeni
+│   │   └── EventForm.css        # Form stilleri
+│   │
+│   ├── Modal/           # Genel modal bileşeni
+│   │   ├── Modal.tsx            # Yeniden kullanılabilir modal
+│   │   └── Modal.css            # Modal stilleri
+│   │
+│   └── index.ts         # Barrel export (tüm bileşenler)
+│
+├── hooks/               # Custom React hooks
+│   ├── useCalendar.ts   # Takvim navigasyonu (ay değiştirme, gün seçimi)
+│   ├── useEvents.ts     # Etkinlik CRUD işlemleri (ekle, sil, güncelle)
+│   ├── useModal.ts      # Modal açma/kapama mantığı
+│   └── index.ts         # Barrel export
+│
+├── constants/           # Sabit değerler
+│   └── index.ts         # Gün isimleri, varsayılan değerler, grid boyutu
+│
+├── types/               # TypeScript tip tanımları
+│   └── index.ts         # Tüm interface ve type tanımları
+│
+├── utils/               # Yardımcı fonksiyonlar
+│   ├── dateUtils.ts     # Tarih formatlama ve hesaplama fonksiyonları
+│   └── index.ts         # Barrel export
+│
+├── styles/              # Global stiller
+│   ├── index.css        # Ana CSS giriş noktası
+│   ├── variables.css    # CSS değişkenleri (renkler, spacing)
+│   ├── reset.css        # Tarayıcı sıfırlama stilleri
+│   └── base.css         # Temel stiller
+│
+├── App.tsx              # Ana uygulama bileşeni
+└── main.tsx             # React giriş noktası
+```
 
-  1. Bağımlılıkları yükleyin:
+## Klasör Açıklamaları
 
-  ```bash
-  npm install
-  ```
+| Klasör | Amaç |
+|--------|------|
+| `components/` | UI bileşenleri - her bileşen kendi klasöründe |
+| `hooks/` | Custom hooks - state ve logic yönetimi |
+| `constants/` | Sabit değerler - hardcoded değerler merkezi yerde |
+| `types/` | TypeScript tipleri - tip güvenliği |
+| `utils/` | Yardımcı fonksiyonlar - tarih işlemleri |
+| `styles/` | Global CSS - değişkenler ve temel stiller |
 
-  2. Geliştirme sunucusunu başlatın:
+## Özellikler
 
-  ```bash
-  npm run dev
-  ```
+- Aylık takvim görünümü
+- Önceki/sonraki ay navigasyonu
+- Gün seçimi (tek tık)
+- Etkinlik ekleme (çift tık)
+- Etkinlik görüntüleme
+- Etkinlik silme
+- Türkçe arayüz
 
-  3. Üretim için build oluşturun:
+## Mimari Prensipler
 
-  ```bash
-  npm run build
-  ```
-
-  Notlar
-
-  - `gorevler/` klasörü repodan kaldırıldı ve `.gitignore`'a eklendi; uygulama kodu `src/` altında.
-  - README gerektiğinde genişletilebilir.
-    - `gorevler/` klasörü proje kökünden kaldırıldı ve izleme dışı bırakıldı; kaynak kod `src/` altında.
-
+- **Single Responsibility**: Her dosya tek bir iş yapar
+- **DRY**: Tekrar eden kod yok
+- **Modüler Yapı**: Bileşenler bağımsız ve yeniden kullanılabilir
+- **Type Safety**: Tüm kod TypeScript ile tip güvenli
