@@ -1,5 +1,6 @@
 import React from 'react';
 import type { CalendarDay as CalendarDayType, CalendarEvent } from '../../types';
+import { formatTime } from '../../utils';
 
 interface DayProps {
     day: CalendarDayType;
@@ -17,14 +18,6 @@ export const CalendarDay: React.FC<DayProps> = ({ day, isSelected, onClick, onDo
         !day.isCurrentMonth ? 'other-month' : '',
         isSelected ? 'selected' : ''
     ].filter(Boolean).join(' ');
-
-    // Saati formatla
-    const formatTime = (date: Date): string => {
-        return new Date(date).toLocaleTimeString('tr-TR', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
 
     // Etkinlige tiklandiginda
     const handleEventClick = (e: React.MouseEvent, event: CalendarEvent) => {

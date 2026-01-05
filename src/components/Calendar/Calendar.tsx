@@ -1,42 +1,41 @@
 import React, { useState } from 'react';
-import { useCalendar } from '../../hooks/useCalendar';
+import { useCalendar, useEvents, useModal } from '../../hooks';
+import { Modal, EventForm, EventDetail } from '..';
 import { CalendarHeader } from './CalendarHeader';
 import { WeekDays } from './WeekDays';
 import { CalendarGrid } from './CalendarGrid';
-import { Modal } from '../Modal';
-import { EventForm } from '../EventForm';
 import type { CalendarEvent } from '../../types';
 import './Calendar.css';
 
 export const Calendar: React.FC = () => {
-    // Tüm mantığı hook'tan çekiyoruz
+    // Takvim navigasyonu hook'u
     const {
         days,
         formattedDate,
         nextMonth,
         prevMonth,
         selectedDate,
-        selectDate,
-        events,
-        addEvent,
-        deleteEvent,
-        getEventsForDate
+        selectDate
     } = useCalendar();
 
+    // Etkinlik yönetimi hook'u
+    const { addEvent, deleteEvent, getEventsForDate } = useEvents();
+
     // Modal state'leri
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const addEventModal = useModal();
+    // Seçili etkinlik state'i (detay modal için)
     const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
     // Etkinlik ekleme handler'ı
     const handleAddEvent = (event: CalendarEvent) => {
         addEvent(event);
-        setIsModalOpen(false);
+        addEventModal.close();
     };
 
     // Gune cift tiklama handler'i - modal'i acar
     const handleDayDoubleClick = (date: Date) => {
         selectDate(date);
-        setIsModalOpen(true);
+        addEventModal.open();
     };
 
     // Etkinlige tiklama handler'i
@@ -50,24 +49,6 @@ export const Calendar: React.FC = () => {
             deleteEvent(selectedEvent.id);
             setSelectedEvent(null);
         }
-    };
-
-    // Tarihi formatla
-    const formatEventDate = (date: Date): string => {
-        return new Date(date).toLocaleDateString('tr-TR', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
-
-    // Saati formatla
-    const formatEventTime = (date: Date): string => {
-        return new Date(date).toLocaleTimeString('tr-TR', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
     };
 
     return (
@@ -91,15 +72,15 @@ export const Calendar: React.FC = () => {
 
             {/* Etkinlik Ekleme Modal'ı */}
             <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                isOpen={addEventModal.isOpen}
+                onClose={addEventModal.close}
                 title="Yeni Etkinlik"
             >
                 {selectedDate && (
                     <EventForm
                         selectedDate={selectedDate}
                         onSubmit={handleAddEvent}
-                        onCancel={() => setIsModalOpen(false)}
+                        onCancel={addEventModal.close}
                     />
                 )}
             </Modal>
@@ -111,43 +92,11 @@ export const Calendar: React.FC = () => {
                 title="Etkinlik Detayı"
             >
                 {selectedEvent && (
-                    <div className="event-detail">
-                        <h3 className="event-detail-title">{selectedEvent.title}</h3>
-
-                        <div className="event-detail-info">
-                            <div className="event-detail-row">
-                                <span className="event-detail-label">Tarih:</span>
-                                <span>{formatEventDate(selectedEvent.startDate)}</span>
-                            </div>
-                            <div className="event-detail-row">
-                                <span className="event-detail-label">Saat:</span>
-                                <span>
-                                    {formatEventTime(selectedEvent.startDate)} - {formatEventTime(selectedEvent.endDate)}
-                                </span>
-                            </div>
-                            {selectedEvent.description && (
-                                <div className="event-detail-row">
-                                    <span className="event-detail-label">Açıklama:</span>
-                                    <span>{selectedEvent.description}</span>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="event-detail-actions">
-                            <button
-                                className="btn-cancel"
-                                onClick={() => setSelectedEvent(null)}
-                            >
-                                Kapat
-                            </button>
-                            <button
-                                className="btn-delete"
-                                onClick={handleDeleteEvent}
-                            >
-                                Sil
-                            </button>
-                        </div>
-                    </div>
+                    <EventDetail
+                        event={selectedEvent}
+                        onClose={() => setSelectedEvent(null)}
+                        onDelete={handleDeleteEvent}
+                    />
                 )}
             </Modal>
         </div>

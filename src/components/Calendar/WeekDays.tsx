@@ -1,7 +1,7 @@
 import React from 'react';
+import { WEEK_DAYS } from '../../constants';
 
-const WEEK_DAYS = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-
+// Haftanın günlerini gösteren bileşen
 export const WeekDays: React.FC = () => {
     return (
         <div className="calendar-weekdays">

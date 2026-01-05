@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { CalendarEvent } from '../../types';
+import { DEFAULT_START_TIME, DEFAULT_END_TIME } from '../../constants';
 import './EventForm.css';
 
 interface EventFormProps {
@@ -11,8 +12,8 @@ interface EventFormProps {
 export const EventForm: React.FC<EventFormProps> = ({ selectedDate, onSubmit, onCancel }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [startTime, setStartTime] = useState('09:00');
-    const [endTime, setEndTime] = useState('10:00');
+    const [startTime, setStartTime] = useState(DEFAULT_START_TIME);
+    const [endTime, setEndTime] = useState(DEFAULT_END_TIME);
     const [error, setError] = useState('');
 
     // Benzersiz ID oluştur
@@ -51,8 +52,8 @@ export const EventForm: React.FC<EventFormProps> = ({ selectedDate, onSubmit, on
         // Formu temizle
         setTitle('');
         setDescription('');
-        setStartTime('09:00');
-        setEndTime('10:00');
+        setStartTime(DEFAULT_START_TIME);
+        setEndTime(DEFAULT_END_TIME);
         setError('');
     };
 

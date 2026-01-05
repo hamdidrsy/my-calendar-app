@@ -1,18 +1,22 @@
 import type { CalendarDay } from '../types';
+import { LOCALE, CALENDAR_GRID_SIZE } from '../constants';
 
+/**
+ * Belirtilen ay için takvim günlerini döndüren yardımcı fonksiyon
+ */
 export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
-
     const days: CalendarDay[] = [];
     const today = new Date();
 
+    // Ayın ilk gününün haftanın hangi gününe denk geldiğini buluyoruz
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
     let startDay = firstDayOfMonth.getDay();
-    // Pazar 0 döner, bizde Pazartesi hafta başı olduğu için düzeltme:
+    // Pazar 0 döner, bizde Pazartesi hafta başı olduğu için düzeltme
     startDay = startDay === 0 ? 7 : startDay;
 
-    // 1. Önceki ayın günleri (Soluk görünmesi için)
+    // 1. Önceki ayın günleri
     for (let i = startDay - 1; i > 0; i--) {
         const date = new Date(currentYear, currentMonth, 1 - i);
         days.push({
@@ -29,10 +33,7 @@ export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
 
     for (let i = 1; i <= totalDaysInMonth; i++) {
         const date = new Date(currentYear, currentMonth, i);
-        const isToday =
-            date.getDate() === today.getDate() &&
-            date.getMonth() === today.getMonth() &&
-            date.getFullYear() === today.getFullYear();
+        const isToday = isSameDay(date, today);
 
         days.push({
             date,
@@ -42,9 +43,8 @@ export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
         });
     }
 
-    // 3. Sonraki ayın günleri (Gridi tamamlamak için)
-    // Standart takvimlerde genelde 6 satır (42 kutu) olur.
-    const remainingDays = 42 - days.length;
+    // 3. Sonraki ayın günleri (grid'i tamamlamak için)
+    const remainingDays = CALENDAR_GRID_SIZE - days.length;
     for (let i = 1; i <= remainingDays; i++) {
         const date = new Date(currentYear, currentMonth + 1, i);
         days.push({
@@ -56,4 +56,57 @@ export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
     }
 
     return days;
+};
+
+/**
+ * Saati formatla (09:30)
+ */
+export const formatTime = (date: Date): string => {
+    return new Date(date).toLocaleTimeString(LOCALE, {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+};
+
+/**
+ * Tarihi formatla (5 Ocak 2026 Pazartesi)
+ */
+export const formatDate = (date: Date): string => {
+    return new Date(date).toLocaleDateString(LOCALE, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+};
+
+/**
+ * Ay ve yılı formatla (Ocak 2026)
+ */
+export const formatMonthYear = (date: Date): string => {
+    return date.toLocaleDateString(LOCALE, {
+        month: 'long',
+        year: 'numeric'
+    });
+};
+
+/**
+ * İki tarihin aynı gün olup olmadığını kontrol et
+ */
+export const isSameDay = (date1: Date, date2: Date): boolean => {
+    return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+    );
+};
+
+/**
+ * Tarih ve saati birleştir
+ */
+export const combineDateTime = (date: Date, time: string): Date => {
+    const [hours, minutes] = time.split(':').map(Number);
+    const combined = new Date(date);
+    combined.setHours(hours, minutes, 0, 0);
+    return combined;
 };
