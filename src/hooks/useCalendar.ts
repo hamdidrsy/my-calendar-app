@@ -25,7 +25,7 @@ export const useCalendar = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
     };
 
-    // UI'da göstermek için formatlanmış tarih başlığı
+    // UI'da başlıkta göstermek için formatlanmış tarih başlığı
     const formattedDate = currentDate.toLocaleDateString('tr-TR', {
         month: 'long',
         year: 'numeric'

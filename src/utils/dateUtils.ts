@@ -60,6 +60,8 @@ export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
 
 /**
  * Saati formatla (09:30)
+ * neden? Çünkü farklı locale'lerde saat formatları değişebilir.
+ * alternatif olarak toLocaleTimeString kullanılabilir.
  */
 export const formatTime = (date: Date): string => {
     return new Date(date).toLocaleTimeString(LOCALE, {
@@ -92,6 +94,7 @@ export const formatMonthYear = (date: Date): string => {
 
 /**
  * İki tarihin aynı gün olup olmadığını kontrol et
+ * neden yapıyoruz ? çünkü tarih objeleri referans olarak farklı olabilir. 
  */
 export const isSameDay = (date1: Date, date2: Date): boolean => {
     return (
@@ -103,6 +106,7 @@ export const isSameDay = (date1: Date, date2: Date): boolean => {
 
 /**
  * Tarih ve saati birleştir
+ * neden? Bazen sadece tarih objesi ve saat stringi ayrı olur, bunları birleştirmek için
  */
 export const combineDateTime = (date: Date, time: string): Date => {
     const [hours, minutes] = time.split(':').map(Number);

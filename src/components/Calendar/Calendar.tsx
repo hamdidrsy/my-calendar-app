@@ -10,12 +10,12 @@ import './Calendar.css';
 export const Calendar: React.FC = () => {
     // Takvim navigasyonu hook'u
     const {
-        days,
-        formattedDate,
-        nextMonth,
-        prevMonth,
-        selectedDate,
-        selectDate
+        days, // Ay içindeki günler
+        formattedDate, // Görüntülenen ayın formatlanmış hali
+        nextMonth, // Sonraki aya geçiş fonksiyonu
+        prevMonth, // Önceki aya geçiş fonksiyonu
+        selectedDate, // Seçili tarih
+        selectDate // Tarih seçme fonksiyonu
     } = useCalendar();
 
     // Etkinlik yönetimi hook'u

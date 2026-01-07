@@ -4,15 +4,15 @@ import { isSameDay } from '../../utils';
 import { CalendarDay } from './CalendarDay';
 
 interface CalendarGridProps {
-    days: CalendarDayType[];
-    selectedDate: Date | null;
-    onDayClick: (date: Date) => void;
-    onDayDoubleClick: (date: Date) => void;
-    getEventsForDate: (date: Date) => CalendarEvent[];
-    onEventClick: (event: CalendarEvent) => void;
+    days: CalendarDayType[]; // Takvimde gösterilecek günler
+    selectedDate: Date | null; // Seçili tarih
+    onDayClick: (date: Date) => void; // Gün tıklama işleyicisi
+    onDayDoubleClick: (date: Date) => void; // Gün çift tıklama işleyicisi
+    getEventsForDate: (date: Date) => CalendarEvent[]; // Belirli bir tarih için etkinlikleri alma fonksiyonu
+    onEventClick: (event: CalendarEvent) => void; // Etkinlik tıklama işleyicisi
 }
 
-// Takvimdeki günleri gösteren bileşen
+// Takvimdeki günleri gösteren bileşen                     günleri, seçili tarihi, gün tıklama ve çift tıklama işleyicilerini alır
 export const CalendarGrid: React.FC<CalendarGridProps> = ({ days, selectedDate, onDayClick, onDayDoubleClick, getEventsForDate, onEventClick }) => {
     return (
         <div className="calendar-days">

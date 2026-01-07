@@ -8,6 +8,8 @@ export const useModal = (initialState = false) => {
     const [isOpen, setIsOpen] = useState(initialState);
 
     // Modal'ı aç
+    //useCallback nedir ? 
+    //useCallback, React'te bir fonksiyonun bellekteki referansını korumak için kullanılan bir hook'tur.
     const open = useCallback(() => setIsOpen(true), []);
 
     // Modal'ı kapat

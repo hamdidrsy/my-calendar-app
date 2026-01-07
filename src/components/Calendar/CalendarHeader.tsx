@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface CalendarHeaderProps {
-    dateDisplay: string;
-    onNext: () => void;
-    onPrev: () => void;
+type CalendarHeaderProps = {
+    dateDisplay: string;// Gösterilecek tarih başlığı
+    onNext: () => void; // Sonraki aya geçiş fonksiyonu
+    onPrev: () => void; // Önceki aya geçiş fonksiyonu
 }
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({ dateDisplay, onNext, onPrev }) => {

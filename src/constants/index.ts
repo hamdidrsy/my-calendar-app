@@ -3,6 +3,7 @@
  */
 
 // Hafta günleri (kısa)
+//as const ifadesi, TypeScript'e bu dizinin elemanlarının değiştirilemez olduğunu belirtir.
 export const WEEK_DAYS = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'] as const;
 
 // Hafta günleri (uzun)
@@ -19,7 +20,7 @@ export const MONTHS = [
 
 // Form varsayılan değerleri
 export const DEFAULT_START_TIME = '09:00';
-export const DEFAULT_END_TIME = '10:00';
+export const DEFAULT_END_TIME = '15:00';
 
 // Takvim grid boyutu (6 hafta x 7 gün)
 export const CALENDAR_GRID_SIZE = 42;
