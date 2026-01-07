@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { CalendarEvent } from '../../types';
+import type { EventFormProps } from '../../types/props.types';
 import { DEFAULT_START_TIME, DEFAULT_END_TIME } from '../../constants';
 import './EventForm.css';
-
-interface EventFormProps {
-    selectedDate: Date;
-    onSubmit: (event: CalendarEvent) => void;
-    onCancel: () => void;
-}
 
 export const EventForm: React.FC<EventFormProps> = ({ selectedDate, onSubmit, onCancel }) => {
     const [title, setTitle] = useState('');

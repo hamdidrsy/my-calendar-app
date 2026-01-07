@@ -1,12 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import type { ModalProps } from '../../types/props.types';
 import './Modal.css';
-
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    title?: string;
-    children: React.ReactNode;
-}
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
     // ESC tuşuna basınca modal kapansın

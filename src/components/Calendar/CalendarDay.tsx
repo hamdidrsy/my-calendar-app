@@ -1,17 +1,8 @@
-import React from 'react';
-import type { CalendarDay as CalendarDayType, CalendarEvent } from '../../types';
+import type { CalendarEvent } from '../../types';
+import type { CalendarDayProps } from '../../types/props.types';
 import { formatTime } from '../../utils';
 
-interface DayProps {
-    day: CalendarDayType;
-    isSelected: boolean;
-    onClick: (date: Date) => void;
-    onDoubleClick: (date: Date) => void;
-    events: CalendarEvent[];
-    onEventClick: (event: CalendarEvent) => void;
-}
-
-export const CalendarDay: React.FC<DayProps> = ({ day, isSelected, onClick, onDoubleClick, events, onEventClick }) => {
+export const CalendarDay: React.FC<CalendarDayProps> = ({ day, isSelected, onClick, onDoubleClick, events, onEventClick }) => {
     const classNames = [
         'day',
         day.isToday ? 'today' : '',

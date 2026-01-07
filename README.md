@@ -63,7 +63,11 @@ src/
 │   └── index.ts         # Gün isimleri, varsayılan değerler, grid boyutu
 │
 ├── types/               # TypeScript tip tanımları
-│   └── index.ts         # Tüm interface ve type tanımları
+│   ├── index.ts              # Barrel export (tüm tipler)
+│   ├── calendar.types.ts     # Temel takvim tipleri (CalendarEvent, CalendarDay)
+│   ├── hooks.types.ts        # Hook return tipleri
+│   ├── props.types.ts        # Component props tipleri
+│   └── form.types.ts         # Form state tipleri
 │
 ├── utils/               # Yardımcı fonksiyonlar
 │   ├── dateUtils.ts     # Tarih formatlama ve hesaplama fonksiyonları
@@ -86,7 +90,7 @@ src/
 | `components/` | UI bileşenleri - her bileşen kendi klasöründe |
 | `hooks/` | Custom hooks - state ve logic yönetimi |
 | `constants/` | Sabit değerler - hardcoded değerler merkezi yerde |
-| `types/` | TypeScript tipleri - tip güvenliği |
+| `types/` | TypeScript tipleri - modüler tip tanımları (calendar, hooks, props, form) |
 | `utils/` | Yardımcı fonksiyonlar - tarih işlemleri |
 | `styles/` | Global CSS - değişkenler ve temel stiller |
 

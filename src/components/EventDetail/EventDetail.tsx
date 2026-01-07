@@ -1,13 +1,6 @@
-import React from 'react';
 import { formatDate, formatTime } from '../../utils';
-import type { CalendarEvent } from '../../types';
+import type { EventDetailProps } from '../../types/props.types';
 import './EventDetail.css';
-
-interface EventDetailProps {
-    event: CalendarEvent;
-    onClose: () => void;
-    onDelete: () => void;
-}
 
 export const EventDetail: React.FC<EventDetailProps> = ({ event, onClose, onDelete }) => {
     return (
