@@ -5,11 +5,11 @@ import { DEFAULT_START_TIME, DEFAULT_END_TIME } from '../../constants';
 import './EventForm.css';
 
 export const EventForm: React.FC<EventFormProps> = ({ selectedDate, onSubmit, onCancel }) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [startTime, setStartTime] = useState(DEFAULT_START_TIME);
-    const [endTime, setEndTime] = useState(DEFAULT_END_TIME);
-    const [error, setError] = useState('');
+    const [title, setTitle] = useState(''); // Etkinlik başlığı
+    const [description, setDescription] = useState(''); // Etkinlik açıklaması
+    const [startTime, setStartTime] = useState(DEFAULT_START_TIME); // Başlangıç saati
+    const [endTime, setEndTime] = useState(DEFAULT_END_TIME); // Bitiş saati
+    const [error, setError] = useState(''); // Hata mesajı
 
     // Benzersiz ID oluştur
     const generateId = () => {

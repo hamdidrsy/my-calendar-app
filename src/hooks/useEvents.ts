@@ -6,10 +6,12 @@ import type { CalendarEvent } from '../types';
  */
 export const useEvents = () => {
     // Etkinlikleri state olarak tutuyoruz
+    // useState ? React'te bir state değişkeni oluşturmak için kullanılan hook'tur.
     const [events, setEvents] = useState<CalendarEvent[]>([]);
 
     // Etkinlik ekleme fonksiyonu
     const addEvent = (event: CalendarEvent) => {
+        // Yeni etkinliği mevcut etkinlikler listesine ekle 
         setEvents(prevEvents => [...prevEvents, event]);
         console.log('Etkinlik eklendi:', event.title);
     };

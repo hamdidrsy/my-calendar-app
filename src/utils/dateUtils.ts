@@ -5,12 +5,13 @@ import { LOCALE, CALENDAR_GRID_SIZE } from '../constants';
  * Belirtilen ay için takvim günlerini döndüren yardımcı fonksiyon
  */
 export const getCalendarDays = (currentDate: Date): CalendarDay[] => {
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth();
-    const days: CalendarDay[] = [];
-    const today = new Date();
+    const currentYear = currentDate.getFullYear(); // Yıl bilgisi
+    const currentMonth = currentDate.getMonth(); // Ay bilgisi (0-11 arası)
+    const days: CalendarDay[] = []; // Takvimde gösterilecek günler
+    const today = new Date(); // Bugünün tarihi
 
     // Ayın ilk gününün haftanın hangi gününe denk geldiğini buluyoruz
+    // güncel yıl güncel ay ve 1. gün
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
     let startDay = firstDayOfMonth.getDay();
     // Pazar 0 döner, bizde Pazartesi hafta başı olduğu için düzeltme
